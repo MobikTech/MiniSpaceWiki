@@ -1,0 +1,54 @@
+﻿@page
+@model MiniSpaceWiki.Pages.MarsRoverModel
+@{
+    ViewData["Title"] = "MarsRover";
+}
+<h1>MarsRover</h1>
+<p>
+    Марсохоод — планетоход, передвигающийся по поверхности Марса. Мягкая посадка марсоходов осуществляется с помощью спускаемых аппаратов.
+</p>
+<p>
+    Марсоходом, в отличие от лунохода, невозможно управлять дистанционно, командами оператора находящегося на Земле, в режиме реального времени из-за значительного запаздывания командных сигналов и сигналов от планетохода. Время запаздывания составляет от 4 до 21 минут в зависимости от взаимного положения Земли и Марса. Задержка возникает, поскольку радиосигналу вследствие конечности его скорости распространения требуется время, чтобы дойти до Марса и от него до Земли. Поэтому марсоходы способны некоторое время функционировать, в том числе передвигаться и выполнять исследования, автономно по заложенным в них программам, получая команды лишь время от времени.
+</p>
+<p>
+    Всего на Марсе работали четыре марсохода для научных исследований. Один из них — «Curiosity» — продолжает работу и в настоящее время. Еще один ровер-рекордсмен «Opportunity», который в 55 раз превысил запланированный срок работы. Его миссия стала самой длительной среди аппаратов, работавших на поверхности Красной планеты.
+</p>
+@foreach (var rover in Model.rovers)
+{
+    <div class="rover-info">
+        <h3>"@rover.name"</h3>
+        <span>
+            Название: "@rover.name"<br />
+            Статус: @rover.status<br />
+            Работал дней: @rover.max_sol<br />
+            Всего фотографий: @rover.total_photos<br />
+            Дата запуска: @rover.landing_date
+            @if (rover.status == "complete")
+            {
+                <br /><span>Завершил роботу: @rover.max_date</span>
+            }
+        </span>
+        <br />
+        <form method="get">
+            <label id="start">Для просмотра фотографий, выберите дату их сьемки: <input type="date" name="Date" value="@rover.max_date" max="@rover.max_date" min="@rover.landing_date" /></label>
+            <input class="unvisible" type="text" value="@rover.name" name="Name" />
+            <input type="submit" class="submit" value="Показать" />
+        </form>
+        @if (rover.show_gallery)
+        {
+            <div id="gallery">
+                Дата: @Model.photos[0].earth_date<br />
+                Количество фотографий: @Model.photos.Count<br />
+                @foreach (var photo in Model.photos)
+                {
+                    <img class="photo" src="@photo.img_src" tabindex="1" />
+                    <div class="center-photo">
+                        <span>Тип камеры: @photo.camera.name</span><br />
+                        <img src="@photo.img_src" class="center-img" />
+                    </div>
+                }
+            </div>
+        }
+    </div>
+
+}

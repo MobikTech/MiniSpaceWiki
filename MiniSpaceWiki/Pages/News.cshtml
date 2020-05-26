@@ -1,0 +1,18 @@
+﻿@page
+@model MiniSpaceWiki.Pages.NewsModel
+@{
+    ViewData["Title"] = "News";
+}
+
+<h1>Последние новости, из сферы астрономии.</h1>
+@foreach (var article in Model.news.items)
+{
+    <a class="new-link" href="@article.link">
+        <div class="new-block" >
+            <img class="new-img" height="380" src="@article.thumbnail" alt="Picture" />
+            <div class="new-sign">@article.title</div>
+            <div class="new-time">@Model.DateAndTime(article.pubDate)</div>
+        </div>
+    </a>
+}
+

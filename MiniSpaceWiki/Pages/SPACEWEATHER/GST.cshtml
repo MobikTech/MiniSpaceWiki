@@ -1,0 +1,85 @@
+﻿@page
+@model MiniSpaceWiki.Pages.DONKI.GSTModel
+@{
+    ViewData["Title"] = "GST";
+    ViewBag.NumberStorm = 1;
+    ViewBag.NumKp = 0;
+
+}
+<h1>Геомагнитные бури(GST)</h1>
+<p>
+    Геомагнитная буря - возмущение геомагнитного поля Земли, своеобразная реакция на вспышки, распространяющиеся на Солнце. Такие вспышки характеризуются выбросом зараженных микрочастиц, которые способны долетать до Земли.
+</p>
+<p>
+    Явление было бы страшным, если бы у Земли не было своего электромагнитного поля, которое защищает нас от негативного воздействия из Космоса. Именно защитная реакция Земли - изменение характеристик электромагнитного поля и есть геомагнитной бурей. Геомагнитные бури - важная часть космической погоды.
+</p>
+<p>
+    Развитие магнитной бури проходит не симметрично, острая фаза длится около семи часов, а возвращение в исходное состояние проходит 72 часа. По интенсивности магнитные бури могут быть умеренными, сильными и экстремальными.
+</p>
+<p>
+    Интенсивность геомагнитной бури обычно описывается индексами Dst и Kp. Kp-индекс — это планетарный индекс. Kp вычисляется как среднее значение К-индексов, определённых на 13 геомагнитных обсерваториях, расположенных между 44 и 60 градусами северной и южной геомагнитных широт. Его диапазон также от 0 до 9. Бури, с индексом меньше 6 считаются слабыми.
+</p>
+<p>
+    Частота умеренных и сильных бурь тесно связана с 11-летним циклом солнечной активности. В среднем бывает около 30 бурь в год, а в период солнечного максимума достигать 50 бурь за 365 дней. Уже подсчитано, что 75 летний человек 15 лет живет в условиях магнитных бурь.
+</p>
+<p>
+    Самой серьезной геомагнитной бурей было событие Кэррингтона в 1859 году. Ученый Ричард Кэррингтон зафиксировал на Солнце большую вспышку. В результате по всему миру можно было наблюдать Северное сияние, не работала телеграфная система и ряд других негативных активностей.
+</p>
+<img width="50%" src="https://images.glavred.info/2017_12/1512381574-14541901.jpg?r=54958" alt="Alternate Text" />
+<p>
+    В 2012 году также наблюдали сильнейшую магнитную бурю, при этом коронарный выброс массы Солнца был аналогичен по силе с тем, что зафиксировали в 1859 году.
+</p>
+@*<img src="https://tesis.lebedev.ru/upload_test/files/kp.png" alt="Alternate Text" />*@
+<h3>Выберите диапазон дат, в котором происходили геомагнитные бури:</h3>
+<form method="get">
+    <label id="start">Начальная дата: <input type="date" name="StartDate" value="@Model.StartDate" /></label> <br />
+    <label id="end">Конечная дата: <input type="date" name="EndDate" value="@Model.EndDate" /></label> <br />
+    <input type="submit" class="submit" value="Показать" />
+</form>
+@if (Model.IsInput)
+{
+    if (Model.list == null)
+    {
+        <p class="red">В этот период не зафиксировано геомагнитных бурь</p>
+    }
+    else
+    {
+<p class="red">В этот период наблюдали @Model.list.Count геомагнитных бурь, с KP-индексом больше 6.</p>
+        <table class="table" id="tableGST" border="1">
+            <caption>Table num</caption>
+            <tr>
+                <th rowspan="2">Number</th>
+                <th rowspan="2">GST ID</th>
+                <th rowspan="2">Start Time</th>
+                <th colspan="2">All Kp Index</th>
+                <th rowspan="2" id="link">Link</th>
+            </tr>
+            <tr>
+                <th>Observed time</th>
+                <th>Kp Index</th>
+            </tr>
+            @foreach (var listik in Model.list)
+            {
+                <tr>
+                    <td rowspan="@listik.allKpIndex.Count">@ViewBag.NumberStorm</td>
+                    <td rowspan="@listik.allKpIndex.Count">@listik.gstID</td>
+                    <td rowspan="@listik.allKpIndex.Count">@listik.startTime</td>
+                    <td>@listik.allKpIndex[ViewBag.NumKp].observedTime</td>
+                    <td>@listik.allKpIndex[ViewBag.NumKp].kpIndex</td>
+                    <td rowspan="@listik.allKpIndex.Count"><a href="@listik.link">@listik.link</a></td>
+
+                </tr>
+                @for (int k = 0; k < listik.allKpIndex.Count - 1; k++)
+                {
+                    ViewBag.NumKp++;
+                    <tr>
+                        <td>@listik.allKpIndex[ViewBag.NumKp].observedTime</td>
+                        <td>@listik.allKpIndex[ViewBag.NumKp].kpIndex</td>
+                    </tr>
+                }
+                ViewBag.NumberStorm++;
+                ViewBag.NumKp = 0;
+            }
+        </table>
+    }
+}

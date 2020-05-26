@@ -1,0 +1,79 @@
+﻿@page
+@model MiniSpaceWiki.Pages.DONKI.CMEModel
+@{
+    ViewData["Title"] = "CME";
+    ViewBag.NumEj = 1;
+    ViewBag.cmeAnalyse = 0;
+}
+
+<h1>Что представляет собой выброс корональной массы (CME)?</h1>
+<p>
+    Выброс корональной массы (CME) представляет собой гигантское облако солнечной плазмы, пронизанное магнитными полевыми линиями, которое распространяется от Солнца во время сильных, долговременных солнечных вспышек и извержения нитей. Первое доказательство существования этих динамических событий появявилось в результате наблюдений, сделанных коронографом установленном на спутнике OSO7 в период с 1971 по 1973 годы. При фоторафировании, коронограф создает солнечное затмение, закрывая Солнце небольшим диском, так как из за яркого свечения Солнца слабое свечение выбросов корональных масс иначе увидеть невозможно. Проекты SOHO и STEREO имеют коронографы белого света для обнаружений выбросов корональной массы. Выбросы корональной массы являются основной причиной возникновения сильных геомагнитных бурь и наблюдение за ними очень важно.
+</p>
+<p>
+    Выброс корональной массы может быть следствием таких событий как солнечные вспышки и извержения нитей. Однако, не каждое такое событие сопровождается выбросом корональным массы. Сильные вспышки (M и X-класса) являются вероятными кандидатами для возникновения выброса корональной массы. Солнечные вспышки С-класса также могут привести к появлению выброса корональной массы, но только в том случае если это длительные и сильные вспышки класса С. Это также зависит от продолжительности солнечной вспышки. Например, если солнечная вспышка с пиковой силой X5 и общей продолжительностью в два часа, то она безусловно будет сопровождаться ярким, большим и мощьным выбросом корональной массы. В зависимости от ее местоположения, она может либо обойти Землю, либо частично или полностью быть на нее направлена. Выброс корональной массы направленный в сторону Земли, на изображениях SOHO, будет выглядеть как частичный или полный гало-корональный. Когда это произойдет, выброс корональной массы прибудет на Землю через 24 часа или более (в зависимости от скорости) и с большой долей вероятности вызовет геомагнитную бурю с яркими авроральными явлениями. В приведенной ниже анимации показан полный гало-корональной выброс массы полученный SOHO/LASCO.
+</p>
+<img class="gif" src="https://www.spaceweatherlive.com/images/help/CME.gif" alt="Alternate Text" />
+<br />
+<p>
+    Во время минимума солнечного цикла, Солнце имеет слабую активность, выбросы корональной массы бывают редко. В такие периоды они возникают приблизительно раз в неделю, однако, в периоды солнечной активности, выбросы корональной массы становятся все более частым явлением и могут происходить ежесуточно и многократно.
+</p>
+<h3>Выберите период, прослеживаемый на выбросы корональной массы:</h3>
+<form method="get">
+    <label id="start">Начальная дата: <input type="date" name="StartDate" value="@Model.StartDate" /></label> <br />
+    <label id="end">Конечная дата: <input type="date" name="EndDate" value="@Model.EndDate" /></label> <br />
+    <input type="submit" class="submit" value="Показать" />
+</form>
+
+@if (Model.IsInput)
+{
+    if (Model.list == null)
+    {
+        <p class="red">В этот период не зафиксировано корональных выбросов</p>
+    }
+    else
+    {
+        <p class="red">В этот период наблюдали @Model.list.Count корональных выбросов.</p>
+        <table class="table" border="1">
+            <caption>Table num</caption>
+            <tr>
+                <th>Number</th>
+                <th>Start Time</th>
+                <th>Time</th>
+                <th>Speed</th>
+                <th>Latitude</th>
+                <th>Longitude</th>
+                <th>Type</th>
+
+            </tr>
+            @foreach (var ejection in Model.list)
+            {
+                if (ejection.cmeAnalyses != null)
+                {
+                    <tr>
+                        <td rowspan="@ejection.cmeAnalyses.Count">@ViewBag.NumEj</td>
+                        <td rowspan="@ejection.cmeAnalyses.Count">@ejection.startTime</td>
+                        <td>@ejection.cmeAnalyses[ViewBag.cmeAnalyse].time21_5</td>
+                        <td>@ejection.cmeAnalyses[ViewBag.cmeAnalyse].speed</td>
+                        <td>@ejection.cmeAnalyses[ViewBag.cmeAnalyse].latitude</td>
+                        <td>@ejection.cmeAnalyses[ViewBag.cmeAnalyse].longitude</td>
+                        <td>@ejection.cmeAnalyses[ViewBag.cmeAnalyse].type</td>
+                    </tr>
+                    @for (int k = 0; k < ejection.cmeAnalyses.Count - 1; k++)
+                    {
+                        ViewBag.cmeAnalyse++;
+                        <tr>
+                            <td>@ejection.cmeAnalyses[ViewBag.cmeAnalyse].time21_5</td>
+                            <td>@ejection.cmeAnalyses[ViewBag.cmeAnalyse].speed</td>
+                            <td>@ejection.cmeAnalyses[ViewBag.cmeAnalyse].latitude</td>
+                            <td>@ejection.cmeAnalyses[ViewBag.cmeAnalyse].longitude</td>
+                            <td>@ejection.cmeAnalyses[ViewBag.cmeAnalyse].type</td>
+                        </tr>
+                    }
+                    ViewBag.NumEj++;
+                    ViewBag.cmeAnalyse = 0;
+                }
+            }
+        </table>
+    }
+}

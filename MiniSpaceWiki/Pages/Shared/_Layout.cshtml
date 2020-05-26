@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" type="text/css" href="~/css/layout.css?v=@DateTime.Now.Millisecond" />
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title</title>
+    <style>
+        body {
+            background-image: url( @*@MiniSpaceWiki.APOD.img_url*@https://hi-news.ru/wp-content/uploads/2017/05/space-03.jpg);
+            background-size: 100%;
+            background-attachment:fixed;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <ul class="menu">
+            <li class="item"><a href="/Index">Main</a></li>
+            <li class="item">
+                <a href="/SpaceWeather">Weather</a> 
+                <ul class="submenu">
+                    <li class="subitem"><a href="/SPACEWEATHER/CME">CME</a></li>
+                    <li class="subitem"><a href="/SPACEWEATHER/GST">GST</a></li>
+                    <li class="subitem"><a href="/SPACEWEATHER/FLR">FLR</a></li>
+                </ul>
+            </li>
+            <li class="item extra-padding"><a href="/MarsRover">Mars Photos</a></li>
+            <li class="item"><a href="/News">News</a></li>
+        </ul>
+    </header>
+    <div class="content">
+        @RenderBody()
+    </div>
+    <footer>© 2020 - Student from KPI</footer>
+</body>
+</html>

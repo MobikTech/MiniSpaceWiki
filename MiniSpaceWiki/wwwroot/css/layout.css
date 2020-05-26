@@ -1,0 +1,314 @@
+﻿* {
+    padding: 0;
+    margin: 0;
+}
+
+    *::selection {
+        background-color: #a2a3a6;
+    }
+
+body {
+    position: relative;
+    max-width: 100%;
+    min-height: 100%;
+    color: antiquewhite;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    position: fixed;
+    display: block;
+    z-index:2;
+    width: 100%;
+    height: 50px;
+    /*border-bottom: 2px solid #4a3e3d;*/
+    /*border-top: 2px solid #4a3e3d;*/
+    background-color: #3c3b70;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+
+footer {
+    position: relative;
+    width: 100%;
+    height: 80px;
+    /*border-bottom: 2px solid #4a3e3d;*/
+    /*border-top: 2px solid #4a3e3d;*/
+    background-color: #3c3b70;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+
+.content {
+    position: relative;
+    display: block;
+    width: 80%;
+    left: 10%;
+    top: 50px;
+    min-height: 73.5vh;
+    background-color: white;
+    color: black;
+    padding: 20px;
+    padding-bottom: 90px;
+    text-indent: 40px;
+    font-size: 20px;
+    text-indent: 0;
+}
+
+.content p {
+    margin-bottom: 10px;
+}
+
+.content h1, h3 {
+    padding: 30px;
+    text-align: center;
+}
+
+.submit {
+    min-height: 25px;
+    min-width: 100px;
+    font-size: 14px;
+    font-family: Verdana;
+    border: 1px solid black;
+    border-radius: 10px;
+    background-color: #b3b3b3;
+    transition-duration: 0.5s;
+}
+
+.submit:hover {
+    background-color: #949494;
+    transform: scale(1.1);
+}
+
+/* Submenu-Start */
+header .item:hover .submenu {
+    display: block;
+    /*border: 2px solid #4a3e3d;*/
+    background-color: #3c3b70;
+}
+
+header .item:hover .subitem {
+    display: block;
+    min-width: 120px;
+    /*border-bottom: 2px solid white;*/
+}
+
+header .item .subitem:hover {
+    background-color: #274f7a;
+    transition-duration: 0.5s;
+}
+
+header .item .subitem a {
+    font-size: 16px;
+}
+
+header .menu .submenu {
+    position: absolute;
+    z-index: 2;
+    display: none;
+}
+.extra-padding {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+/* Submenu-End */
+
+/*Menu*/
+.menu {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+.menu .item a {
+    display: block;
+    height: 50px;
+    text-decoration: none;
+    color: #d1c8a7;
+    text-align: center;
+    line-height: 50px;
+    font-size: 22px;
+    font-family: "Bookman Old Style";
+    text-shadow: 1px 1px 2px #685473;
+    /*border: 1px solid green;*/
+}
+
+.menu .item {
+    position: relative;
+    min-width: 120px;
+    min-height: 50px;
+    display: inline-block;
+    /*margin-right:6px;
+    margin-left:6px;
+    padding-right:6px;
+    padding-left:6px;*/
+    /*border-right: 2px solid #4a3e3d;*/
+    float: left;
+}
+
+.item:hover {
+    background-color: #274f7a;
+    transition-duration:0.5s;
+}
+/* End-Menu */
+
+/* GST-Start */
+
+
+.table {
+    position: relative;
+    border: 1px solid black;
+    border-collapse: collapse;
+    min-width: 100%;
+    font-size: 15px;
+    text-align: center;
+}
+
+.table th {
+    border: 1px solid black;
+}
+
+.table td {
+    border: 1px solid black;
+    padding: 10px;
+}
+
+#link {
+    max-width: 400px;
+}
+
+.unvisible {
+    display: none;
+}
+/* GST-End */
+
+/* CME-Start */
+.gif {
+    border: 2px solid black;
+    border-radius: 3px;
+}
+/* CME-End */
+
+/* MarsRoverCSS-Start */
+#gallery {
+    position: relative;
+    min-height: 150px;
+    width: 100%;
+    /*border: 1px solid orange;*/
+}
+
+.rover-info {
+    position: relative;
+    border: 1px solid black;
+    max-width: 100%;
+    min-height: 150px;
+    margin-bottom: 10px;
+    padding: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+
+.photo {
+    height: 100px;
+    max-width:100%;
+    border: 1px solid #ddd;
+    border-radius: 2px;
+    padding: 3px;
+    transition: height 0.5s ease;
+}
+
+.center-photo {
+    position: fixed;
+    display: none;
+    z-index: 1;
+    margin-left: auto;
+    margin-right: auto;
+    top: 10%;
+    height: 80%;
+    width: auto;
+    max-width:80%;
+    background-color: #a6aba7;
+    text-align: center;
+}
+
+.center-img {
+    position:relative;
+    max-width:100%;
+}
+
+.center-photo img {
+    position: relative;
+    height: 95%;
+}
+
+.center-photo span {
+    position: relative;
+}
+
+.photo:focus + .center-photo {
+    display: block;
+    border: 10px solid #a6aba7;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0,0,0,1);
+}
+
+.photo:hover {
+    box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
+}
+
+/* MarsRoverCSS-End */
+
+.red {
+    color: darkred;
+}
+/* News-Start */
+.new-block {
+    position: relative;
+    display: inline-block;
+    width: 602px;
+    height: 380px;
+    border: 1px solid black;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+
+.new-sign {
+    z-index: 1;
+    position: absolute;
+    max-width: 100%;
+    min-width: 100%;
+    background-color: rgba(15,15,15,0.4);
+    text-align: center;
+    font-size: 25px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    color: white;
+}
+
+.new-time {
+    z-index: 1;
+    position: absolute;
+    bottom: 0;
+    max-width: 100%;
+    min-width: 100%;
+    background-color: rgba(15,15,15,0.4);
+    text-align: center;
+    color: white;
+}
+
+.new-img {
+    position: absolute;
+    transition: 1s;
+}
+
+.new-block:hover .new-sign {
+    color: dodgerblue;
+}
+
+.new-block:hover .new-img {
+    transform: scale(1.1);
+}
+/* News-End */
+.img {
+    width: 100%;
+    max-height:100vh;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
